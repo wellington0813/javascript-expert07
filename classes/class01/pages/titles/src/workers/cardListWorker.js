@@ -1,5 +1,12 @@
 onmessage = ({ data }) => {
-  console.log("data", data);
+  let counter = 0;
 
-  postMessage({ response: "ok" });
+  console.log("activating blocking operation...", data.maxItens);
+  console.time("blocking-op");
+  // blocking function
+  // 1e5 = 100.000
+  for (; counter < data.maxItens; counter++) console.log(".");
+  console.timeEnd("blocking-op");
+
+  postMessage({ response: "ok", data: counter });
 };
